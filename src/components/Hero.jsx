@@ -49,7 +49,7 @@ export default function Hero() {
             color="warning"
             sx={{ fontSize: 20, px: 4 }}
           >
-            Ver promociones
+            Ver la carta
           </Button>
         </Box>
       </Container>

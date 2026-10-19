@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import PriceBadge from './PriceBadge'
+import { basePrice } from '../data/products'
 import { brand } from '../theme'
 
 export default function ProductCard({ product, onSelect }) {
@@ -27,7 +28,7 @@ export default function ProductCard({ product, onSelect }) {
       </CardActionArea>
 
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 1.5, position: 'relative', pt: 3 }}>
-        <PriceBadge price={product.price} size={88} sx={{ position: 'absolute', right: 16, top: -50 }} />
+        <PriceBadge price={basePrice(product)} label={product.sizes ? 'Desde' : 'Valor'} size={88} sx={{ position: 'absolute', right: 16, top: -50 }} />
         <Typography variant="h5" component="h3" sx={{ pr: 11, fontSize: 22, lineHeight: 1.15 }}>
           {product.title}
         </Typography>

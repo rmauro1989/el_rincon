@@ -3,7 +3,7 @@ import { formatPrice } from '../data/products'
 import { brand, fonts } from '../theme'
 
 // Círculo rojo con borde dorado, como el "VALOR" de los flyers
-export default function PriceBadge({ price, size = 96, sx }) {
+export default function PriceBadge({ price, label = 'Valor', size = 96, sx }) {
   return (
     <Box
       sx={{
@@ -23,7 +23,7 @@ export default function PriceBadge({ price, size = 96, sx }) {
       }}
     >
       <Box component="span" sx={{ fontSize: size * 0.2, letterSpacing: 1 }}>
-        Valor
+        {label}
       </Box>
       <Box component="span" sx={{ fontSize: size * 0.29 }}>
         {formatPrice(price)}

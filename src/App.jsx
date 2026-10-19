@@ -3,6 +3,7 @@ import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import Container from '@mui/material/Container'
 import Snackbar from '@mui/material/Snackbar'
+import Typography from '@mui/material/Typography'
 import About from './components/About'
 import BrushLabel from './components/BrushLabel'
 import CartDrawer from './components/CartDrawer'
@@ -13,7 +14,7 @@ import Location from './components/Location'
 import ProductCard from './components/ProductCard'
 import ProductDialog from './components/ProductDialog'
 import { useCart } from './cart'
-import { categories, products } from './data/products'
+import { categories, products, sections } from './data/products'
 import { brand } from './theme'
 
 export default function App() {
@@ -43,7 +44,7 @@ export default function App() {
         <Container id="promociones" component="section" maxWidth="lg" sx={{ pt: { xs: 6, md: 9 }, scrollMarginTop: 72 }}>
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <BrushLabel variant="cream" component="h2" sx={{ fontSize: { xs: 28, md: 40 }, px: { xs: 3, md: 5 } }}>
-              Nuestras promociones
+              Nuestra carta
             </BrushLabel>
           </Box>
 
@@ -83,18 +84,42 @@ export default function App() {
             })}
           </Box>
 
-          <Box
-            sx={{
-              display: 'grid',
-              gap: { xs: 4, md: 4 },
-              rowGap: { xs: 5, md: 6 },
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-            }}
-          >
-            {visible.map((p) => (
-              <ProductCard key={p.id} product={p} onSelect={setSelected} />
-            ))}
-          </Box>
+          {sections.map((section) => {
+            const items = visible.filter((p) => p.kind === section.id)
+            if (items.length === 0) return null
+            return (
+              <Box key={section.id} component="section" aria-labelledby={`sec-${section.id}`} sx={{ mb: { xs: 6, md: 8 } }}>
+                <Typography
+                  id={`sec-${section.id}`}
+                  variant="h4"
+                  component="h3"
+                  sx={{
+                    fontSize: { xs: 26, md: 32 },
+                    color: brand.gold,
+                    mb: { xs: 5, md: 6 },
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    '&::after': { content: '""', flex: 1, height: 3, bgcolor: brand.orange, borderRadius: 2, opacity: 0.6 },
+                  }}
+                >
+                  {section.label}
+                </Typography>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gap: 4,
+                    rowGap: { xs: 5, md: 6 },
+                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+                  }}
+                >
+                  {items.map((p) => (
+                    <ProductCard key={p.id} product={p} onSelect={setSelected} />
+                  ))}
+                </Box>
+              </Box>
+            )
+          })}
         </Container>
 
         <Location />

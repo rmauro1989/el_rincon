@@ -6,6 +6,8 @@ import Dialog from '@mui/material/Dialog'
 import IconButton from '@mui/material/IconButton'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
+import ToggleButton from '@mui/material/ToggleButton'
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
@@ -39,13 +41,22 @@ function ProductForm({ product, onClose, onAdd }) {
   const [choices, setChoices] = useState(() => Array(picks).fill(''))
   const [qty, setQty] = useState(1)
   const [touched, setTouched] = useState(false)
+  // Por defecto el tamaño más grande, que es el de la foto principal
+  const [sizeLabel, setSizeLabel] = useState(product.sizes?.at(-1).label)
 
+  const size = product.sizes?.find((s) => s.label === sizeLabel)
+  const price = size ? size.price : product.price
+  const image = size?.image ?? product.image
   const missing = choices.some((c) => !c)
 
   const handleAdd = () => {
     setTouched(true)
     if (missing) return
-    onAdd(product, choices.length ? choices.join(' + ') : undefined, qty)
+    // Cada tamaño es una línea distinta del pedido
+    const item = size
+      ? { ...product, id: `${product.id}:${size.label}`, title: `${product.title} ${size.label.toLowerCase()}`, price, image }
+      : product
+    onAdd(item, choices.length ? choices.join(' + ') : undefined, qty)
   }
 
   return (
@@ -58,7 +69,7 @@ function ProductForm({ product, onClose, onAdd }) {
         <CloseRoundedIcon />
       </IconButton>
 
-      <Box component="img" src={product.image} alt={product.title} sx={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }} />
+      <Box component="img" src={image} alt={product.title} sx={{ width: '100%', height: { md: '100%' }, aspectRatio: { xs: '1 / 1', md: 'auto' }, minHeight: { md: 480 }, objectFit: 'cover', display: 'block' }} />
 
       <Box sx={{ p: { xs: 2.5, md: 4 }, display: 'flex', flexDirection: 'column', gap: 2.5 }}>
         <BrushLabel variant="cream" component="h2" sx={{ fontSize: { xs: 22, md: 26 }, alignSelf: 'flex-start' }}>
@@ -89,6 +100,41 @@ function ProductForm({ product, onClose, onAdd }) {
                 <Chip key={i} label={i} size="small" sx={{ bgcolor: 'rgba(255,255,255,.08)', fontFamily: fonts.body, fontSize: 13 }} />
               ))}
             </Box>
+          </Box>
+        )}
+
+        {product.sizes && (
+          <Box>
+            <Typography variant="overline" sx={{ color: brand.gold, fontWeight: 700 }}>
+              Tamaño
+            </Typography>
+            <ToggleButtonGroup
+              exclusive
+              fullWidth
+              value={sizeLabel}
+              onChange={(_, value) => value && setSizeLabel(value)}
+              aria-label="Tamaño"
+            >
+              {product.sizes.map((s) => (
+                <ToggleButton
+                  key={s.label}
+                  value={s.label}
+                  sx={{
+                    flexDirection: 'column',
+                    lineHeight: 1.2,
+                    textTransform: 'none',
+                    '&.Mui-selected, &.Mui-selected:hover': { bgcolor: brand.orange, color: brand.white },
+                  }}
+                >
+                  <Box component="span" sx={{ fontFamily: fonts.display, fontSize: 16 }}>
+                    {s.label}
+                  </Box>
+                  <Box component="span" sx={{ fontSize: 13 }}>
+                    {formatPrice(s.price)}
+                  </Box>
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
           </Box>
         )}
 
@@ -131,7 +177,7 @@ function ProductForm({ product, onClose, onAdd }) {
             </IconButton>
           </Box>
           <Typography sx={{ fontFamily: fonts.price, fontSize: 40, color: brand.gold, lineHeight: 1 }}>
-            {formatPrice(product.price * qty)}
+            {formatPrice(price * qty)}
           </Typography>
         </Box>
 
