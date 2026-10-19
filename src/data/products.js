@@ -266,10 +266,6 @@ export const products = [
   },
 ]
 
-// Precio mínimo para mostrar en la tarjeta ("Desde")
-export const basePrice = (product) =>
-  product.sizes ? Math.min(...product.sizes.map((s) => s.price)) : product.price
-
 const clp = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 })
 export const formatPrice = (value) => clp.format(value)
 
