@@ -46,7 +46,7 @@ export default function Footer() {
           </Link>
         </Box>
       </Container>
-      <Typography variant="body2" sx={{ textAlign: 'center', pb: 3, color: 'rgba(255,255,255,.7)' }}>
+      <Typography variant="body2" sx={{ textAlign: 'center', pb: { xs: 13, md: 4 }, color: 'rgba(255,255,255,.7)' }}>
         © {new Date().getFullYear()} El Rincón Sandwichería
       </Typography>
     </Box>

@@ -7,10 +7,11 @@ import Typography from '@mui/material/Typography'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded'
+import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import BrushLabel from './BrushLabel'
 import { useCart, whatsappOrderUrl } from '../cart'
-import { formatPrice } from '../data/products'
+import { ADDRESS, formatPrice } from '../data/products'
 import { brand, fonts } from '../theme'
 
 export default function CartDrawer({ open, onClose }) {
@@ -71,6 +72,12 @@ export default function CartDrawer({ open, onClose }) {
 
       <Divider />
       <Box sx={{ p: 2.5, display: 'grid', gap: 1.5 }}>
+        <Typography
+          sx={{ display: 'flex', alignItems: 'center', gap: 1, color: brand.cream, fontWeight: 600, bgcolor: 'rgba(148,19,24,.45)', borderRadius: 2, px: 1.5, py: 1 }}
+        >
+          <StorefrontRoundedIcon fontSize="small" sx={{ color: brand.gold }} />
+          Solo retiro en local: {ADDRESS}
+        </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <Typography variant="h6">Total</Typography>
           <Typography sx={{ fontFamily: fonts.price, fontSize: 40, color: brand.gold, lineHeight: 1 }}>

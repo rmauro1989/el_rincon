@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useReducer } from 'react'
-import { WHATSAPP_NUMBER, formatPrice } from './data/products'
+import { ADDRESS, WHATSAPP_NUMBER, formatPrice } from './data/products'
 
 const STORAGE_KEY = 'elrincon-cart'
 const CartContext = createContext(null)
@@ -80,6 +80,6 @@ export function whatsappOrderUrl(lines, total) {
   const items = lines
     .map((l) => `• ${l.qty} x ${l.title}${l.option ? ` (${l.option})` : ''} — ${formatPrice(l.qty * l.price)}`)
     .join('\n')
-  const text = `¡Hola El Rincón! Quiero hacer este pedido:\n\n${items}\n\nTotal: ${formatPrice(total)}`
+  const text = `¡Hola El Rincón! Quiero hacer este pedido:\n\n${items}\n\nTotal: ${formatPrice(total)}\nRetiro en local: ${ADDRESS}`
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
 }

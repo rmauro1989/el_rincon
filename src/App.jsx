@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Location from './components/Location'
+import OrderButton from './components/OrderButton'
 import ProductCard from './components/ProductCard'
 import ProductDialog from './components/ProductDialog'
 import { useCart } from './cart'
@@ -129,12 +130,14 @@ export default function App() {
 
       <ProductDialog product={selected} onClose={() => setSelected(null)} onAdd={handleAdd} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      {!cartOpen && <OrderButton onClick={() => setCartOpen(true)} />}
       <Snackbar
         open={Boolean(toast)}
         autoHideDuration={2500}
         onClose={() => setToast('')}
         message={toast}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        sx={{ top: { xs: 76, md: 92 } }}
       />
     </>
   )
