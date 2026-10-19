@@ -117,3 +117,17 @@ export const products = [
 
 const clp = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 })
 export const formatPrice = (value) => clp.format(value)
+
+export const ADDRESS = 'Embalse La Palma 5976, Peñalolén'
+const mapsQuery = encodeURIComponent('Embalse La Palma 5976, 7930966 Peñalolén, Región Metropolitana')
+// Ficha del local en Google Maps
+export const MAP_PLACE_URL =
+  'https://www.google.com/maps/place/Embalse+La+Palma+5976,+7930966+Pe%C3%B1alol%C3%A9n,+Regi%C3%B3n+Metropolitana/data=!4m2!3m1!1s0x9662d04f1dea6041:0x5847b1626f90a83b'
+export const MAP_EMBED_URL = `https://www.google.com/maps?q=${mapsQuery}&z=16&output=embed`
+export const MAP_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`
+
+// TODO: reemplazar por el texto de "Quiénes somos" del Figma
+export const ABOUT = [
+  'En El Rincón Sandwichería preparamos al momento los clásicos de siempre: hamburguesas, completos, italianos, as y churrascos tradicionales.',
+  'Somos un local de barrio en Peñalolén que cocina con ingredientes frescos, porciones generosas y buenos precios, para que disfrutes un sándwich como en casa.',
+]

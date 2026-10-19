@@ -3,8 +3,9 @@ import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import PlaceRoundedIcon from '@mui/icons-material/PlaceRounded'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import { INSTAGRAM_USER, WHATSAPP_NUMBER } from '../data/products'
+import { ADDRESS, INSTAGRAM_USER, MAP_PLACE_URL, WHATSAPP_NUMBER } from '../data/products'
 import { brand } from '../theme'
 
 const linkSx = {
@@ -34,6 +35,9 @@ export default function Footer() {
       >
         <Box component="img" src="/assets/logo.png" alt="El Rincón Sandwichería" sx={{ height: 90 }} />
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 2, sm: 5 }, alignItems: 'center' }}>
+          <Link href={MAP_PLACE_URL} target="_blank" rel="noopener" sx={linkSx}>
+            <PlaceRoundedIcon /> {ADDRESS}
+          </Link>
           <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener" sx={linkSx}>
             <WhatsAppIcon /> +56 9 5146 6739
           </Link>

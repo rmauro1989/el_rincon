@@ -3,11 +3,13 @@ import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import Container from '@mui/material/Container'
 import Snackbar from '@mui/material/Snackbar'
+import About from './components/About'
 import BrushLabel from './components/BrushLabel'
 import CartDrawer from './components/CartDrawer'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Location from './components/Location'
 import ProductCard from './components/ProductCard'
 import ProductDialog from './components/ProductDialog'
 import { useCart } from './cart'
@@ -94,6 +96,9 @@ export default function App() {
             ))}
           </Box>
         </Container>
+
+        <Location />
+        <About />
       </main>
       <Footer />
 

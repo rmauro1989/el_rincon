@@ -20,6 +20,8 @@ export default function Header({ onOpenCart }) {
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
           <Button color="inherit" href="#promociones">Promociones</Button>
+          <Button color="inherit" href="#ubicacion">Ubicación</Button>
+          <Button color="inherit" href="#quienes-somos">Quiénes somos</Button>
           <Button color="inherit" href="#contacto">Contacto</Button>
         </Box>
         <IconButton
