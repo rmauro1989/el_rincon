@@ -228,8 +228,7 @@ export const products = [
     title: 'Chorrillana grande para 4 personas',
     includes: ['Chorrillana grande para 4 personas'],
     ingredients: ['Carne', 'Champiñón', 'Cebolla caramelizada', 'Vienesas', 'Papas fritas', 'Huevos'],
-    // TODO: confirmar precio, el flyer dice $1300
-    price: 1300,
+    price: 13000,
     image: img('chorrillana'),
   },
   {
