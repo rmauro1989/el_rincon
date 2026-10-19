@@ -77,6 +77,11 @@ export function CartProvider({ children }) {
 export const useCart = () => useContext(CartContext)
 
 export function whatsappOrderUrl(lines, total) {
+  // Sin productos: abre el chat con un saludo para consultar
+  if (lines.length === 0) {
+    const text = '¡Hola El Rincón! Quiero hacer una consulta.'
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
+  }
   const items = lines
     .map((l) => `• ${l.qty} x ${l.title}${l.option ? ` (${l.option})` : ''} — ${formatPrice(l.qty * l.price)}`)
     .join('\n')

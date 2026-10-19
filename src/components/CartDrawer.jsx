@@ -88,13 +88,12 @@ export default function CartDrawer({ open, onClose }) {
           variant="contained"
           size="large"
           startIcon={<WhatsAppIcon />}
-          disabled={empty}
-          href={empty ? undefined : whatsappOrderUrl(lines, total)}
+          href={whatsappOrderUrl(lines, total)}
           target="_blank"
           rel="noopener"
           sx={{ bgcolor: '#25D366', color: '#0b3d1f', fontSize: 18, '&:hover': { bgcolor: '#1fb857' } }}
         >
-          Enviar pedido por WhatsApp
+          {empty ? 'Escríbenos por WhatsApp' : 'Enviar pedido por WhatsApp'}
         </Button>
         {!empty && (
           <Button color="inherit" onClick={clear} sx={{ color: 'text.secondary' }}>
